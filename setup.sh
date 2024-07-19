@@ -7,15 +7,15 @@ cleanup() {
     echo "Cleaning up previous build artifacts..."
     sleep 3
     # Add commands to clean up previous build artifacts
-    sudo docker rm -f $(docker ps -aq) || true
-    sudo docker rmi -f $(docker images) || true
+    docker rm -f $(docker ps -aq) || true
+    docker rmi -f $(docker images) || true
     echo "Cleanup done."
 }
 # Function to build the Docker image
 build_docker() {
     echo "Building the Docker image..."
     sleep 3
-    sudo docker build -t $DOCKER_IMAGE .
+    docker build -t $DOCKER_IMAGE .
 }
 # Function to modify the application
 modify_app() {
@@ -28,7 +28,7 @@ modify_app() {
 run_docker() {
     echo "Running Docker container..."
     sleep 3
-    sudo docker run -d -p 3000:$PORT -e PORT=$PORT $DOCKER_IMAGE
+    docker run -d -p 3000:$PORT -e PORT=$PORT $DOCKER_IMAGE
 }
 # Main script execution
 echo "Starting build process..."
